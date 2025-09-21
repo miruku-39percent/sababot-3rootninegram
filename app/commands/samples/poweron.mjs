@@ -5,7 +5,7 @@ export const data = new SlashCommandBuilder()
   .setDescription("サーバーを起動するよ～");
 
 export async function execute(interaction) {
- // 1. ログイン処理
+  // 1. ログイン処理
   const loginUrl = 'https://aternos.org/go/';
   const loginData = {
     username: 'raputa_is_15',  // あなたのユーザー名
@@ -58,6 +58,7 @@ export async function execute(interaction) {
       credentials: 'include',  // クッキーを送信
     });
 
+    // レスポンスのステータスコードを確認
     if (startResponse.ok) {
       const data = await startResponse.json();
       console.log('サーバーが起動しました:', data);
@@ -65,9 +66,11 @@ export async function execute(interaction) {
         await interaction.reply("サーバーを起動しました！");
       }
     } else {
-      console.log('サーバー起動失敗:', startResponse.status);
+      // ステータスコードが412の場合、エラー詳細を表示
+      const errorData = await startResponse.text();
+      console.log('サーバー起動失敗:', startResponse.status, errorData);
       if (!interaction.replied) {
-        await interaction.reply("サーバーの起動に失敗しました。");
+        await interaction.reply("サーバーの起動に失敗しました。エラー詳細: " + startResponse.status);
       }
     }
   } catch (error) {
@@ -76,3 +79,4 @@ export async function execute(interaction) {
       await interaction.reply("サーバー起動時にエラーが発生しました。");
     }
   }
+}
