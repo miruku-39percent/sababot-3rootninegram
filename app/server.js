@@ -32,7 +32,11 @@ http.createServer(function(req, res){
 
 client.on('ready', message =>{
   console.log('Bot準備完了～');
-  client.user.setActivity: ('テスト');
+});
+
+client.on("ready", async () => {
+  await client.user.setActivity('テスト');
+  console.log(`${client.user.tag} がログインしました！`);
 });
 
 client.on('message', message =>{
