@@ -5,7 +5,7 @@ export const data = new SlashCommandBuilder()
   .setDescription("サーバーを起動するよ～");
 
 export async function execute(interaction) {
-  // 1. ログイン処理
+ // 1. ログイン処理
   const loginUrl = 'https://aternos.org/go/';
   const loginData = {
     username: 'raputa_is_15',  // あなたのユーザー名
@@ -14,7 +14,6 @@ export async function execute(interaction) {
 
   const loginHeaders = {
     'Content-Type': 'application/json',
-    // 必要に応じて他のヘッダーを追加する
   };
 
   let cookies = '';  // ログイン後のクッキーを格納する変数
@@ -43,21 +42,8 @@ export async function execute(interaction) {
     return;
   }
 
-  // 2. サーバー起動処理
-    try {
-    const response = await fetch("https://aternos.org/ajax/server/start?access-credits=false&TOKEN=2sXYsREN40nA9CS4hEtQ&SEC=BFwbVpI2yO9KLBgq%3AMCsU2Ji2m2iUVMHs&SERVER=BOZSUsrBrqqpD5sP", {
-      method: 'GET', // HTTPメソッド（GET）
-    });
-
-    if (response.ok) { // ステータスコード200のチェック
-      const data = await response.json();
-      console.log(data);
-    } else {
-      console.log(`Error: ${response.status}`);
-    }
-  } catch (error) {
-    console.log("Fetch Error:", error);
-  }
+  // 2. サーバー起動処理（特定のURLにGETリクエストを送る）
+  const serverStartUrl = 'https://aternos.org/ajax/server/start?access-credits=false&TOKEN=2sXYsREN40nA9CS4hEtQ&SEC=BFwbVpI2yO9KLBgq%3AMCsU2Ji2m2iUVMHs&SERVER=BOZSUsrBrqqpD5sP';  // サーバー起動用のURL
 
   const serverStartHeaders = {
     'Content-Type': 'application/json',
@@ -65,7 +51,8 @@ export async function execute(interaction) {
   };
 
   try {
-    const startResponse = await fetch(`${serverStartUrl}?${params}`, {
+    // サーバー起動リクエストを送信
+    const startResponse = await fetch(serverStartUrl, {
       method: 'GET',
       headers: serverStartHeaders,
       credentials: 'include',  // クッキーを送信
@@ -74,13 +61,18 @@ export async function execute(interaction) {
     if (startResponse.ok) {
       const data = await startResponse.json();
       console.log('サーバーが起動しました:', data);
-      await interaction.reply("サーバーを起動しました！");
+      if (!interaction.replied) {
+        await interaction.reply("サーバーを起動しました！");
+      }
     } else {
       console.log('サーバー起動失敗:', startResponse.status);
-      await interaction.reply("サーバーの起動に失敗しました。");
+      if (!interaction.replied) {
+        await interaction.reply("サーバーの起動に失敗しました。");
+      }
     }
   } catch (error) {
     console.log('サーバー起動エラー:', error);
-    await interaction.reply("サーバー起動時にエラーが発生しました。");
+    if (!interaction.replied) {
+      await interaction.reply("サーバー起動時にエラーが発生しました。");
+    }
   }
-}
