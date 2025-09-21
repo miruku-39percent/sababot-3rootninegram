@@ -6,7 +6,7 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction) {
   // 1. ログイン処理
-  const loginUrl = 'https://aternos.org/login/';
+  const loginUrl = 'https://aternos.org/go/';
   const loginData = {
     username: 'raputa_is_15',  // あなたのユーザー名
     password: 'openserver'   // あなたのパスワード
