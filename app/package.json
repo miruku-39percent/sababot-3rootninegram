@@ -1,7 +1,7 @@
 {
-  "name": "minipotato-bot-by-eoi",
+  "name": "sababot-powered-by-MiniPotato",
   "version": "0.1.2",
-  "description": "MiniPotato Bot by EOi",
+  "description": "sababot powered by MiniPotato made by Eoi",
   "main": "main.mjs",
   "scripts": {
     "start": "node main.mjs"
