@@ -13,8 +13,8 @@ export async function execute(interaction) {
 
   //const loginUrl = 'https://aternos.org/go/';
   //const loginData = {
-    //username: 'raputa_is_15',
-   // password: 'openserver'
+    //username: '',
+   // password: ''
  // };
 
   //try {
