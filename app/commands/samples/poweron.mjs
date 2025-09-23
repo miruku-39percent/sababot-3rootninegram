@@ -30,7 +30,11 @@ export async function execute(interaction) {
 
     console.log('ログイン成功');
   } catch (error) {
-    console.error('ログイン失敗:', error.message);
+    if (error.response) {
+      console.error('レスポンスエラー:', error.response.status, error.response.data);
+    } else {
+      console.error('ログイン失敗:', error.message);
+    }
     await interaction.reply('ログインに失敗しました。');
     return;
   }
