@@ -24,6 +24,14 @@ export async function execute(interaction) {
         'Content-Type': 'application/json',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36',
         'Referer': 'https://aternos.org/:ja/', // 参照元を明示的に指定
+        'Cookie': '_ga=GA1.1.737222294.1758594560; _ga_70M94GH0FD=GS2.1.s1758594560$o1$g1$t1758594567$j53$l0$h0',
+        'Sec-Ch-Ua': '"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"',
+        'Sec-Ch-Ua-Mobile': '?0',
+        'Sec-Ch-Ua-Platform': '"Windows"',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'same-origin',
+        'upgrade-insecure-requests': '1'
       },
       maxRedirects: 5
     });
@@ -47,8 +55,16 @@ export async function execute(interaction) {
       headers: {
         'Accept': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-        'Referer': 'https://aternos.org/server/', // 実際の参照元ページに合わせる必要あり
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36',
+        'Referer': 'https://aternos.org/server/', 
+        'Cookie': 'uid=6615131858693277632'
+        'Sec-Ch-Ua': '"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"',
+        'Sec-Ch-Ua-Mobile': '?0',
+        'Sec-Ch-Ua-Platform': '"Windows"',
+        'Sec-Fetch-Dest': 'image',
+        'Sec-Fetch-Mode': 'no-cors',
+        'Sec-Fetch-Site': 'cross-site',
+        'Sec-Fetch-Storage-Access': 'active'// 実際の参照元ページに合わせる必要あり
       }
     });
 
