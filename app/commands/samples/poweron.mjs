@@ -14,7 +14,6 @@ export const data = new SlashCommandBuilder()
   .setName("poweron")
   .setDescription("サーバーを起動するよ～");
 
-// コマンド実行関数
 async function execCommand(cmd) {
   return new Promise((resolve, reject) => {
     exec(cmd, (error, stdout, stderr) => {
@@ -31,16 +30,17 @@ async function execCommand(cmd) {
 
 // サーバー起動処理
 export async function execute(interaction) {
-  await interaction.reply("サーバーを起動中...");
+  await interaction.reply("Minecraftサーバーを起動中...");
 
   const cmd = `gcloud compute instances start ${INSTANCE} --zone ${ZONE}`;
 
   try {
     const result = await execCommand(cmd);
     console.log(result);
-    await interaction.editReply("サーバーを起動しました！");
+    await interaction.editReply("Minecraftサーバーを起動しました！");
   } catch (error) {
     console.error(error);
-    await interaction.editReply("サーバーの起動に失敗しました。");
+    await interaction.editReply("Minecraftサーバーの起動に失敗しました。");
   }
 }
+
