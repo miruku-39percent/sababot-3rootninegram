@@ -7,7 +7,7 @@ WORKDIR /app
 # appフォルダ内の内容をコンテナの/appにコピー
 COPY app/ .
 
-# gcloud CLIのインストール
+# gcloud CLIをインストール
 RUN apt-get update && apt-get install -y \
     curl \
     gnupg \
@@ -23,7 +23,6 @@ RUN npm install
 
 # コンテナの認証設定用の環境変数（サービスアカウントキーのパス）
 # 環境変数に設定することで、gcloud CLIで認証できます。
-# 認証用のサービスアカウントキーをコンテナにマウントする必要があります。
 # ENV GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account-key.json"
 
 # ポート3000を開ける（Koyeb用など）
