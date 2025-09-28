@@ -1,32 +1,17 @@
-# 使用するNode.jsのバージョンを指定
+# Node.jsのバージョン、変える事。
 FROM node:18
 
-# 作業ディレクトリを/appに設定
+# 作業ディレクトリを /app に
 WORKDIR /app
 
-# appフォルダ内の内容をコンテナの/appにコピー
+# app フォルダ内の内容をコンテナの /app にコピー
 COPY app/ .
 
-# gcloud CLIをインストール
-RUN apt-get update && apt-get install -y \
-    curl \
-    gnupg \
-    lsb-release \
-    ca-certificates \
-    && curl -sSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | tee /usr/share/keyrings/cloud.google.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list \
-    && apt-get update && apt-get install -y google-cloud-sdk \
-    && apt-get clean
-
-# 依存関係をインストール
+# 依存関係のインストール
 RUN npm install
 
-# コンテナの認証設定用の環境変数（サービスアカウントキーのパス）
-# 環境変数に設定することで、gcloud CLIで認証できます。
-# ENV GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account-key.json"
-
-# ポート3000を開ける（Koyeb用など）
+# ポートを開ける（Koyeb用）、使用してるポート番号にすること。
 EXPOSE 3000
 
-# Discord Botの起動コマンドを指定
+# アプリの起動、コマンドを指定しよう。index.jsなら"node", "index.js"
 CMD ["node", "main.mjs"]
